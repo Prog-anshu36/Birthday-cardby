@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Bhavya</title>
+    <style>
+  
+
+        body {
+            background: url('images (9).jpeg') no-repeat center center fixed;
+            background-size: cover; /* Ensures the image covers the entire screen */
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Birthday decoration */
+        .decoration {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://cdn.pixabay.com/photo/2017/12/26/06/02/candle-3046565_960_720.png'), 
+                        url('https://cdn.pixabay.com/photo/2016/11/18/15/06/birthday-cake-1835353_960_720.png'), 
+                        url('https://cdn.pixabay.com/photo/2013/07/12/14/07/candy-148437_960_720.png');
+            background-repeat: no-repeat;
+            background-position: 20% 10%, 50% 50%, 80% 90%;
+            background-size: 80px, 150px, 60px;
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        h1 {
+            margin-top: 20px;
+            color: black;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .book-stack {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin-top: 20px;
+        }
+
+        .book-stack img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .enlarged {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 300px !important;
+            height: 300px !important;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        /* Style for images in their reset positions */
+        .reset {
+            transform: translate(-50%, -50%) !important;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="decoration"></div> <!-- Birthday decoration -->
+
+    <div class="book-stack" id="bookStack">
+        <img src="Screenshot_20241230-062127~2.jpg" onclick="handleImageClick(event)">
+        <img src="Screenshot_20241230-062133~2.jpg" onclick="handleImageClick(event)">
+        <img src="Screenshot_20241230-062140~2.jpg" onclick="handleImageClick(event)">
+        <img src="Screenshot_20241230-062204~2.jpg" onclick="handleImageClick(event)">
+        <img src="Screenshot_20241230-062212~2.jpg" onclick="handleImageClick(event)">
+        
+    </div>
+      <audio autoplay loop>
+    <source src="birthdaysong.mp3" type="audio/mp3">
+    
+</audio>
+
+
+    <h1>HAPPY BIRTHDAY BHAVYA<br>Oh sorry CHOCO</h1>
+
+    <script>
+        const images = document.querySelectorAll('.book-stack img');
+        const stack = document.getElementById('bookStack');
+
+        // Function to handle image click
+        function handleImageClick(event) {
+            const clickedImage = event.target;
+
+            // Enlarge the clicked image
+            clickedImage.classList.add('enlarged');
+
+            // After 1 second, reset the image and move it to the back
+            setTimeout(() => {
+                clickedImage.classList.remove('enlarged');
+                clickedImage.classList.add('reset'); // Reset the image to its original position
+                stack.appendChild(clickedImage); // Move the image to the back of the stack
+                randomizeImages(); // Re-randomize the positions of the images
+            }, 1000);
+        }
+
+        // Function to randomize positions and rotations on page load
+        function randomizeImages() {
+            images.forEach((img) => {
+                const randomTop = Math.random() * 80 - 40; // Randomize top position
+                const randomLeft = Math.random() * 80 - 40; // Randomize left position
+                const randomRotation = Math.random() * 60 - 30; // Randomize rotation
+                img.style.transform = `translate(-50%, -50%) rotate(${randomRotation}deg) translate(${randomTop}px, ${randomLeft}px)`;
+            });
+        }
+
+        // Randomize positions on load
+        window.onload = randomizeImages;
+    </script>
+</body>
+</html>
